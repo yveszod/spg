@@ -28,3 +28,5 @@ export type PageData = {
     website?: string;
   };
 };
+
+export type TemplateType = "restaurant" | "salon";

@@ -1,5 +1,10 @@
-import type { PageData } from "@/types/page";
+"use client";
+
+import { useState } from "react";
+import type { PageData, TemplateType } from "@/types/page";
 import RestaurantTemplate from "@/components/templates/RestaurantTemplate";
+import SalonTemplate from "@/components/templates/SalonTemplate";
+import TemplateRenderer from "@/components/TemplateRenderer";
 
 const pageData: PageData = {
   business: {
@@ -37,5 +42,25 @@ const pageData: PageData = {
 };
 
 export default function Home() {
-  return <RestaurantTemplate data={pageData} />;
+  const [selectedTemplate, setSelectedTemplate] =
+    useState<TemplateType>("restaurant");
+
+  return (
+    <main>
+      <div style={{ display: "flex", gap: "10px", padding: "20px" }}>
+        <button onClick={() => setSelectedTemplate("restaurant")}>
+          Restaurant
+        </button>
+
+        <button onClick={() => setSelectedTemplate("salon")}>
+          Salon
+        </button>
+      </div>
+
+      <TemplateRenderer
+        template={selectedTemplate}
+        data={pageData}
+      />
+    </main>
+  );
 }
